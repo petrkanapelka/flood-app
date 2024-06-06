@@ -30,5 +30,5 @@ export const Rating = () => {
         );
     });
 
-    return <>{StarsDivs}</>;
+    return <div style={{display:'flex', gap: '15px'}}>{StarsDivs}</div>;
 };
