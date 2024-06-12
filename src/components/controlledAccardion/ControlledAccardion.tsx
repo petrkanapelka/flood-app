@@ -8,15 +8,20 @@ const items = [
     { id: 5, name: 'HTML' },
 ]
 
-export const Accardion = () => {
+export const ControlledAccardion = () => {
+
     let [collapsed, setCollapsed] = useState(false)
+
 
     const listItems = items.map(item => <li key={item.id}>{item.name}</li>)
 
     return (
         <div>
-            <h1 onClick={() => { setCollapsed(!collapsed) }} style={{cursor: 'pointer'}} onDoubleClick={(e)=>alert(e.currentTarget.tagName)}>Menu items</h1>
-            {!collapsed && <ul>{listItems}</ul>}
+            <h1
+                onClick={() => { setCollapsed(!collapsed) }}
+                style={{ cursor: 'pointer' }}
+            >Controlled Menu items</h1>
+            {!collapsed && <ul >{listItems}</ul>}
         </div>
     );
 };
