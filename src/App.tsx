@@ -10,7 +10,7 @@ export type itemType = {
   name: string
 }
 
-const items: Array<itemType> = [
+export const items: Array<itemType> = [
   { id: 1, name: 'CSS' },
   { id: 2, name: 'JS' },
   { id: 3, name: 'TS' },
@@ -19,7 +19,7 @@ const items: Array<itemType> = [
 ]
 
 
-const Stars: Array<{value:number}> = [
+export const Stars: Array<{value:number}> = [
   { value: 1 },
   { value: 2 },
   { value: 3 },
