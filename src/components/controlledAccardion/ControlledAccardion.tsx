@@ -1,4 +1,5 @@
-import React, { useState } from 'react';
+import React, { useReducer, useState } from 'react';
+import { reducer, TOGGLE_CONSTANT } from './reducer';
 
 const items = [
     { id: 1, name: 'CSS' },
@@ -10,7 +11,8 @@ const items = [
 
 export const ControlledAccardion = () => {
 
-    let [collapsed, setCollapsed] = useState(false)
+    // let [collapsed, setCollapsed] = useState(false)
+    let [state, dispatch] = useReducer(reducer, { collapsed: false })
 
 
     const listItems = items.map(item => <li key={item.id}>{item.name}</li>)
@@ -18,10 +20,11 @@ export const ControlledAccardion = () => {
     return (
         <div>
             <h1
-                onClick={() => { setCollapsed(!collapsed) }}
+                // onClick={() => { setCollapsed(!collapsed) }}
+                onClick={() => { dispatch({ type: TOGGLE_CONSTANT }) }}
                 style={{ cursor: 'pointer' }}
-            >Controlled Menu items</h1>
-            {!collapsed && <ul >{listItems}</ul>}
+            >NOW  Controlled Menu items</h1>
+            {!state.collapsed && <ul >{listItems}</ul>}
         </div>
     );
 };
