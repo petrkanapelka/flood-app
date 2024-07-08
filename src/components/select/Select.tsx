@@ -1,6 +1,13 @@
 import { useState, KeyboardEvent, useEffect } from 'react';
 import styles from './Select.module.css'
 
+export const itemsSelected =
+    [
+        { value: '1', title: 'Minsk' },
+        { value: '2', title: 'Moscow' },
+        { value: '3', title: 'Kiev' }
+    ]
+
 
 type ItemType = {
     title: string
