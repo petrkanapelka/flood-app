@@ -20,12 +20,14 @@ export const UncontrolRating: React.FC<UncontrolRatingProps> = (props: Uncontrol
     const StarsDivs = props.stars.map((star, indx) => {
         const isSelected = indx + 1 <= props.ratingValue;
         return (
-            <Star key={indx}
+            <StarMemo key={indx}
                 className={`star ${isSelected ? 'star-selected' : ''}`}
                 onClickHandler={() => onClickHandler(star.value)}
             />
         );
     });
+
+
 
     return <div style={{ display: 'flex', gap: '15px' }}>
         <h3>Controlled rating</h3>
@@ -46,3 +48,5 @@ const Star = (props: StarProps) => {
         ></div>
     )
 }
+
+const StarMemo = React.memo(Star)
