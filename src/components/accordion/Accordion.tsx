@@ -5,14 +5,18 @@ type ItemType = {
     title: string
     value: any
 }
+
 type AccordionProps = {
     titleValue: string
     collapsed: boolean
     onChange: () => void
     items: ItemType[]
-    onClick: (value:any)=>void
+    onClick: (value: any) => void
 
 };
+
+
+
 export const Accordion = (props: AccordionProps) => {
     return (
         <div>
@@ -38,14 +42,14 @@ function AccordionTitle(props: AccordionTitleProps) {
 
 type AccordionBodyProps = {
     items: ItemType[]
-    onClick: (value:any)=>void
+    onClick: (value: any) => void
 }
 
 
 function AccordionBody(props: AccordionBodyProps) {
     return (
         <ul>
-            {props.items.map((el, i)=><li onClick={()=>props.onClick(el.value)} key={i}>{el.title}</li>)}
+            {props.items.map((el, i) => <li onClick={() => props.onClick(el.value)} key={i}>{el.title}</li>)}
         </ul>
     )
 }
