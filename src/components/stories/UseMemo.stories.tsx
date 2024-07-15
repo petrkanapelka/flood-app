@@ -1,3 +1,4 @@
+import React from "react";
 import { useMemo, useState } from "react";
 
 export default {
@@ -36,6 +37,41 @@ export const Example = () => {
             <hr></hr>
             <div> Result for a: {resultA}</div>
             <div> Result for a: {resultB}</div>
+        </>
+    )
+}
+
+const UsersSecret = (props: { users: Array<string> }) => {
+    console.log("🚀 ~ UsersSecret ~ UsersSecret ➔");
+    return <div>
+        {props.users.map((u, i) => <div key={i}>{u}</div>)}
+    </div>
+}
+
+const Users = React.memo(UsersSecret)
+
+export const HelpsToReacMemo = () => {
+    console.log("🚀 ~ HelpsToReacMemo ~ HelpsToReacMemo");
+    const [counter, setCounter] = useState(0)
+    const [users, setUsers] = useState(['Valera', 'Vasia', 'Petr', 'Agator'])
+
+    const addUser = () => {
+        console.log("🚀 ~ addUser ~ addUser ➔");
+        const newUser = (`${'Sveta' + ' ' + new Date().getTime()}`)
+        setUsers([...users, newUser])
+    }
+
+    const newUsers = useMemo(() => {
+        console.log("🚀 ~ newUsers ~ newUsers ➔");
+        return users.filter(u => u.toLowerCase().indexOf('a') >= 0)
+    }, [users])
+
+    return (
+        <>
+            <button onClick={() => { setCounter(counter + 1) }}>+</button>
+            <button onClick={addUser}>add user</button>
+            {counter}
+            <Users users={newUsers} />
         </>
     )
 }
