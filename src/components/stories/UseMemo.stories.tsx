@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useCallback } from "react";
 import { useMemo, useState } from "react";
 
 export default {
@@ -75,3 +75,43 @@ export const HelpsToReacMemo = () => {
         </>
     )
 }
+
+const BooksSecret = (props: { books: Array<string>; addBook: () => void }) => {
+    console.log("🚀 ~ BooksSecret ~ BooksSecret ➔");
+    return <div>
+        <button onClick={() => props.addBook()}>add book</button>
+        {props.books.map((book, i) => <div key={i}>{book}</div>)}
+    </div>
+}
+
+const Books = React.memo(BooksSecret)
+
+export const LikeUseCallBack = () => {
+    console.log("🚀 ~ LikeUseCallBack ~ LikeUseCallBack");
+    const [counter, setCounter] = useState(0)
+    const [books, setBooks] = useState(['JS', 'TS', 'React', 'Angular'])
+
+
+    const memoAddBook = useCallback(() => {
+        console.log("🚀 ~ addBook ~ addBook ➔", books);
+        const newBook = `${`Redux ${new Date().getTime()}`}`;
+        setBooks([...books, newBook])
+    }, [books])
+
+    const newBooks = useMemo(() => {
+        console.log("🚀 ~ newBooks ~ newBooks ➔");
+        return books
+    }, [books])
+
+    return (
+        <>
+            <button onClick={() => { setCounter(counter + 1) }}>+</button>
+            {counter}
+            <Books books={newBooks} addBook={memoAddBook} />
+        </>
+    )
+}
+
+
+
+
