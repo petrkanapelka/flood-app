@@ -22,12 +22,10 @@ export const SimpleUseEffect = () => {
 
     useEffect(() => {
         console.log('use effect every render');
-        document.title = counter.toString()
     })
 
     useEffect(() => {
         console.log('use effect first time');
-        document.title = counter.toString()
     }, [])
 
     useEffect(() => {
@@ -37,8 +35,38 @@ export const SimpleUseEffect = () => {
 
     return (
         <>
-            <button onClick={() => { setCounter(counter + 1) }}>+</button>
+            <button
+                onClick={() => { setCounter(counter + 1) }}
+                onDoubleClick={() => setCounter(counter + 50)}
+                onMouseEnter={() => setCounter(counter + 100)}>+</button>
             <Counter count={counter} />
+        </>
+    )
+}
+
+export const SetIntervalUseEffect = () => {
+    console.log('SetIntervalUseEffect');
+
+    let [date, setDate] = useState(new Date())
+
+
+    useEffect(() => {
+        console.log('use effect');
+        setInterval(() => {
+            console.log('setInterval');
+            setDate(prevstate => new Date())
+        }, 1000)
+    }, [])
+
+
+    return (
+        <>
+            <div>
+                {date.toLocaleTimeString()}
+            </div>
+            <div>
+                {date.toTimeString()}
+            </div>
         </>
     )
 }
