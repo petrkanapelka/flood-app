@@ -52,10 +52,14 @@ export const SetIntervalUseEffect = () => {
 
     useEffect(() => {
         console.log('use effect');
-        setInterval(() => {
+        const intervalId = setInterval(() => {
             console.log('setInterval');
             setDate(prevstate => new Date())
         }, 1000)
+
+        return () => {
+            clearInterval(intervalId)
+        }
     }, [])
 
 
