@@ -18,7 +18,7 @@ const generateData = () => {
     let i = 0;
     while (i < 900000000) {
         i++
-    }
+    } 
     return 500;
 }
 
