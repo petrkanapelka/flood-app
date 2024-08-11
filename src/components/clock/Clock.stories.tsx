@@ -1,4 +1,5 @@
-import { Clock } from "./Clock";
+import { useState } from "react";
+import { Clock, ClockType } from "./Clock";
 
 
 export default {
@@ -7,8 +8,28 @@ export default {
 }
 
 
-export const BaseExample = () => {
+export const BaseAnalogExample = () => {
     return (
-        <Clock type='analog' />
+        <Clock mode='analog' />
+    )
+}
+
+export const BaseDigitalExample = () => {
+    return (
+        <Clock mode='digital' />
+    )
+}
+
+
+export const BaseClockExample = () => {
+    let [stateClock, setStateClock] = useState<ClockType>({ mode: 'digital' })
+    const onClickHandeler = () => {
+        setStateClock(prev => prev.mode === 'analog' ? { mode: 'digital' } : { mode: 'analog' })
+    }
+    return (
+        <>
+            <button onClick={onClickHandeler}>SWITCH CLOCK</button>
+            <Clock mode={stateClock.mode} />
+        </>
     )
 }
