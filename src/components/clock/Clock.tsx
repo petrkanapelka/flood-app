@@ -1,13 +1,20 @@
-import { node } from 'prop-types';
-import * as React from 'react';
-type Props = {
-    type: 'digital' | 'analog'
+import { AnalogClock } from './AnalogClock';
+import { DigitalClockView } from './DigitalClock';
+import { useEffect, useState } from 'react';
+
+export type ClockType = {
+    mode: 'digital' | 'analog'
 };
 
-export const Clock = (props: Props) => {
-    const [date, setDate] = React.useState(new Date())
+export function getTwoDigitString(number: number) {
+    return number < 10 ? '0' + number : number
+}
 
-    React.useEffect(() => {
+export const Clock = ({ mode }: ClockType) => {
+
+    let [date, setDate] = useState(new Date())
+
+    useEffect(() => {
         const intervalId = setInterval(() => {
             setDate(new Date())
         }, 1000)
@@ -17,31 +24,26 @@ export const Clock = (props: Props) => {
         }
     }, [])
 
-    function getTwoDigitString(number: number) {
-        return number < 10 ? '0' + number : number
+    let view;
+
+    switch (mode) {
+        case 'digital':
+            view = <DigitalClockView date={date} />
+            break;
+        case 'analog':
+            view = <AnalogClock date={date} />
+            break;
+        default:
+            break;
     }
+
 
     return (
         <>
-            <div style={props.type === 'digital' ? { display: 'block' } : { display: 'none' }}>
-                <span>{getTwoDigitString(date.getHours())}</span>
-                :
-                <span>{getTwoDigitString(date.getMinutes())}</span>
-                :
-                <span>{getTwoDigitString(date.getSeconds())}</span>
-            </div>
-            <div
-                style={props.type === 'digital' ? { display: 'none' } : { borderRadius: '100%', border: '2px solid black', width: '100px', height: '100px', marginTop: '20px', position: 'relative' }}>
-                <div
-                    style={{ width: '1px', height: '45px', background: 'red', position: 'absolute', top: '50%', left: '50%', transform: `translate(-50%, -100%) rotate(${getTwoDigitString(date.getSeconds() * 6)}deg)`, transformOrigin: 'center bottom' }}>
-                </div>
-                <div
-                    style={{ width: '2px', height: '40px', background: 'black', position: 'absolute', top: '50%', left: '50%', transform: `translate(-50%, -100%) rotate(${getTwoDigitString(date.getMinutes() * 6)}deg)`, transformOrigin: 'center bottom' }}>
-                </div>
-                <div
-                    style={{ width: '2px', height: '25px', background: 'black', position: 'absolute', top: '50%', left: '50%', transform: `translate(-50%, -100%) rotate(${getTwoDigitString(date.getHours() * 30)}deg)`, transformOrigin: 'center bottom' }}>
-                </div>
-            </div>
+            {view}
         </>
     );
 };
+
+
+
