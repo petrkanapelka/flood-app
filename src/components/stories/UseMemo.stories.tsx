@@ -57,6 +57,7 @@ export const HelpsToReacMemo = () => {
 
     const addUser = () => {
         console.log("🚀 ~ addUser ~ addUser ➔");
+        // eslint-disable-next-line no-useless-concat
         const newUser = (`${'Sveta' + ' ' + new Date().getTime()}`)
         setUsers([...users, newUser])
     }
