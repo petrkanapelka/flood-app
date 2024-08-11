@@ -8,7 +8,7 @@ export default {
 
 
 const Counter = React.memo((props: any) => {
-    console.log("Counter")
+    // console.log("Counter")
 
     return <div>{props.count}</div>
 })
@@ -71,6 +71,55 @@ export const SetIntervalUseEffect = () => {
             <div>
                 {date.toTimeString()}
             </div>
+        </>
+    )
+}
+
+export const ResetEffectExample = () => {
+    console.log('ResetEffectExample');
+
+    const [counter, setCounter] = useState(0)
+
+    useEffect(() => {
+        console.log('use effect ');
+        return () => {
+            console.log('reset effect');
+        }
+    }, [counter])
+    const increase = () => {
+        setCounter(counter + 1)
+    }
+
+    return (
+        <>
+            <button
+                onClick={increase}
+            >+</button>
+            <Counter count={counter} />
+        </>
+    )
+}
+
+
+export const KeysTrackerExample = () => {
+
+    let [text, setText] = useState('')
+
+    useEffect(() => {
+        const handler = (e: KeyboardEvent) => {
+            setText(prev => prev + e.key)
+            console.log(e.key);
+        }
+        window.document.addEventListener('keypress', handler)
+        return () => {
+            console.log('remove effect');
+            window.document.removeEventListener('keypress', handler)
+        }
+    }, [])
+
+    return (
+        <>
+            Typed text: {text}
         </>
     )
 }
